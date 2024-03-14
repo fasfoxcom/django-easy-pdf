@@ -16,7 +16,7 @@ from weasyprint import CSS, HTML, default_url_fetcher
 # We will replace them with the python native modules they are alias for.
 from six import BytesIO
 # The urlquote from Django=3.x has lazy-evaluation capability. However that capability
-# is not needed here since how the function is used. See urlquote occurences in this lib
+# is not needed here since how the function (urlquote) is used. See urlquote occurences
 # and https://github.com/django/django/blob/3591e1c1acbd7c13174275367c3fdf012cb0413b/django/utils/http.py#L45
 from urllib.parse import quote as urlquote
 
