@@ -11,14 +11,14 @@ except ImportError:
 from django.core.files.base import ContentFile
 from django.http import HttpResponse, HttpRequest
 from django.template import loader
-from django.utils.http import urlquote
 from weasyprint import CSS, HTML, default_url_fetcher
-# Django >= 3.0 doesn't have utils.six module anymore
-# so, we tweek it with python six package.
-try:
-    from django.utils.six import BytesIO
-except ImportError:
-    from six import BytesIO
+# Django >= 4 doesn't have utils.six and utils.http.urlquote modules.
+# We will replace them with the python native modules they are alias for.
+from six import BytesIO
+# The urlquote from Django=3.x has lazy-evaluation capability. However that capability
+# is not needed here since how the function is used. See urlquote occurences in this lib
+# and https://github.com/django/django/blob/3591e1c1acbd7c13174275367c3fdf012cb0413b/django/utils/http.py#L45
+from urllib.parse import quote as urlquote
 
 __all__ = [
     'html_to_pdf', 'encode_filename', 'make_response',
